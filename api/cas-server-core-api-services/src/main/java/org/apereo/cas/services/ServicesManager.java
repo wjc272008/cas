@@ -77,7 +77,7 @@ public interface ServicesManager {
      * @param clazz the clazz
      * @return the collection of services that matches the supplied type
      */
-    Collection<RegisteredService> findServiceBy(Predicate<RegisteredService> clazz);
+    Collection<? extends RegisteredService> findServiceBy(Predicate<RegisteredService> clazz);
 
     /**
      * Find service by type.
@@ -113,7 +113,7 @@ public interface ServicesManager {
      *
      * @return the collection of all services.
      */
-    Collection<RegisteredService> getAllServices();
+    Collection<? extends RegisteredService> getAllServices();
 
     /**
      * Convenience method to let one know if a service exists in the data store.
@@ -155,7 +155,7 @@ public interface ServicesManager {
      * @param domain the domain name
      * @return list of services
      */
-    default Collection<RegisteredService> getServicesForDomain(String domain) {
+    default Collection<? extends RegisteredService> getServicesForDomain(String domain) {
         return getAllServices();
     }
 
