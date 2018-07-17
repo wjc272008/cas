@@ -16,29 +16,25 @@ import org.apereo.cas.config.CasCoreTicketCatalogConfiguration;
 import org.apereo.cas.config.CasCoreTicketsConfiguration;
 import org.apereo.cas.config.CasCoreUtilConfiguration;
 import org.apereo.cas.config.CasCoreWebConfiguration;
+import org.apereo.cas.config.CasMongoDbThrottlingConfiguration;
 import org.apereo.cas.config.CasPersonDirectoryConfiguration;
 import org.apereo.cas.config.CasRegisteredServicesTestConfiguration;
-import org.apereo.cas.config.CasThrottlingConfiguration;
+import org.apereo.cas.config.CasSupportMongoDbAuditConfiguration;
 import org.apereo.cas.config.support.CasWebApplicationServiceFactoryConfiguration;
 import org.apereo.cas.logout.config.CasCoreLogoutConfiguration;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.autoconfigure.RefreshAutoConfiguration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.test.context.TestPropertySource;
 
 /**
- * Unit test for {@link InMemoryThrottledSubmissionByIpAddressAndUsernameHandlerInterceptorAdapter}.
+ * This is  {@link MongoDbThrottledSubmissionHandlerInterceptorAdapterTests}.
  *
- * @author Marvin S. Addison
- * @since 3.0.0
+ * @author Timur Duehr
+ * @since 6.0.0
  */
-@TestPropertySource(properties = {"cas.authn.throttle.usernameParameter=username"})
-@EnableScheduling
-@Slf4j
 @SpringBootTest(classes = {
-    CasThrottlingConfiguration.class,
+    CasMongoDbThrottlingConfiguration.class,
     CasCoreAuditConfiguration.class,
     CasCoreConfiguration.class,
     CasCoreAuthenticationServiceSelectionStrategyConfiguration.class,
@@ -57,9 +53,18 @@ import org.springframework.test.context.TestPropertySource;
     CasCoreAuthenticationConfiguration.class,
     CasCoreServicesAuthenticationConfiguration.class,
     CasCoreHttpConfiguration.class,
+    CasSupportMongoDbAuditConfiguration.class,
     CasCoreWebConfiguration.class,
     CasRegisteredServicesTestConfiguration.class,
     CasWebApplicationServiceFactoryConfiguration.class})
-public class InMemoryThrottledSubmissionByIpAddressAndUsernameHandlerInterceptorAdapterTests
-        extends BaseThrottledSubmissionHandlerInterceptorAdapterTests {
+@TestPropertySource(properties = {
+    "cas.authn.throttle.usernameParameter=username",
+    "cas.audit.mongo.host=ds135522.mlab.com",
+    "cas.audit.mongo.port=35522",
+    "cas.audit.mongo.userId=casuser",
+    "cas.audit.mongo.password=Mellon",
+    "cas.audit.mongo.databaseName=jasigthrottle",
+    "cas.audit.mongo.dropCollection=true",
+    "cas.audit.mongo.asynchronous=false"})
+public class MongoDbThrottledSubmissionHandlerInterceptorAdapterTests extends BaseThrottledSubmissionHandlerInterceptorAdapterTests {
 }
