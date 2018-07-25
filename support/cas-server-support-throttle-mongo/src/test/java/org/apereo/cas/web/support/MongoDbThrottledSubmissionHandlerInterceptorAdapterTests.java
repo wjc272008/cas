@@ -59,11 +59,11 @@ import org.springframework.test.context.TestPropertySource;
     CasWebApplicationServiceFactoryConfiguration.class})
 @TestPropertySource(properties = {
     "cas.authn.throttle.usernameParameter=username",
-    "cas.audit.mongo.host=ds135522.mlab.com",
-    "cas.audit.mongo.port=35522",
-    "cas.audit.mongo.userId=casuser",
-    "cas.audit.mongo.password=Mellon",
-    "cas.audit.mongo.databaseName=jasigthrottle",
+    "cas.audit.mongo.host=localhost",
+    "cas.audit.mongo.port=8081",
+    "cas.audit.mongo.userId=",
+    "cas.audit.mongo.password=",
+    "cas.audit.mongo.databaseName=throttle",
     "cas.audit.mongo.dropCollection=true",
     "cas.audit.mongo.asynchronous=false"})
 public class MongoDbThrottledSubmissionHandlerInterceptorAdapterTests extends BaseThrottledSubmissionHandlerInterceptorAdapterTests {
